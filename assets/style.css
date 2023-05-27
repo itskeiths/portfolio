@@ -255,12 +255,12 @@
                 transition: all 0.3s ease-in-out;
             }
             
-            #mode-icon {
+            #l-icon {
                 width: 20%;
             }
             
             @media (max-width: 767px) {
-                #mode-icon {
+                #l-icon {
                     width: 40%;
                 }
             }
