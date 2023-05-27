@@ -412,7 +412,6 @@
             grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
         }
         .project-card {
-            width: 300px;
             text-align: center;
             margin-left: 20px;
         }
