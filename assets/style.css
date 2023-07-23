@@ -11,11 +11,12 @@
             }
             
              :root {
-                --main-color: #033a80;
-                --bg-color: #fff;
-                --text-color: #0f0c27;
-                --home-color: #b2f0b8;
-                --hover: hsl(260, 100%, 51%);
+                --main-color: #440a67;
+                --bg-color: hsla(204, 100%, 99%, 0.349);
+                --text-color: #161625;
+                --home-color: #65acbf;
+                --light-blue: #4da3ff;
+                --hover: hsl(240, 90%, 55%);
                 --big-font: 3.2rem;
                 --medium-font: 1.8rem;
                 --p-font: 0.941rem;
@@ -154,11 +155,75 @@
             .home-text h1 {
                 font-size: var(--big-font);
             }
+            /* Your existing CSS */
+            /* ... */
+            /* New styles to position the emoji and hide auto-typed text */
+            
+            .home-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .home-text h1 {
+                display: flex;
+                align-items: center;
+            }
+            
+            .home-text h1 img {
+                margin-left: 10px;
+                /* Adjust the margin as per your preference */
+            }
+            
+            .home-text h4 {
+                display: none;
+                /* Hide the auto-typed text */
+            }
+            /* The rest of your existing CSS */
+            /* ... */
             
             .home-text h2 {
                 font-size: 1.1rem;
                 font-weight: 400;
             }
+            /* Your existing CSS */
+            /* ... */
+            /* New styles for auto-typed text and bye emoji */
+            
+            .home-text h4 {
+                font-size: var(--p-font);
+                font-weight: 600;
+                margin-top: 10px;
+                color: #333;
+                /* Initial color of the auto-typed text */
+                animation: changeColor 5s infinite;
+                /* Animation to change colors */
+            }
+            
+            @keyframes changeColor {
+                0% {
+                    color: #f00;
+                }
+                /* Change to the desired color for 0% of the animation */
+                25% {
+                    color: #0f0;
+                }
+                /* Change to the desired color for 25% of the animation */
+                50% {
+                    color: #00f;
+                }
+                /* Change to the desired color for 50% of the animation */
+                75% {
+                    color: #ff0;
+                }
+                /* Change to the desired color for 75% of the animation */
+                100% {
+                    color: #f00;
+                }
+                /* Change to the desired color for 100% of the animation */
+            }
+            /* The rest of your existing CSS */
+            /* ... */
             
             .home-text p {
                 font-size: var(--p-font);
@@ -232,6 +297,24 @@
             
             .skills {
                 background-color: var(--home-color);
+                animation: fallingAnimation 1s ease;
+            }
+            
+            @keyframes fallingAnimation {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-50px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .bars-box {
+                animation: fallingAnimation 1s ease;
+                animation-delay: calc(0.3s + var(--animation-delay));
+                /* --animation-delay will be a variable to stagger the animations of individual bars */
             }
             
             .skills-container {
@@ -357,146 +440,86 @@
                 color: #8b8a8f;
             }
             
-            .projects {
+            projects {
                 padding-top: 2rem;
                 margin-top: 2rem;
-                background-color: var(--bg-color);
+                background-color: #5a67ff;
+                text-align: center;
             }
             
             .projects__heading {
-                text-align: center;
-                margin-bottom: 3rem;
-                color: var(--text-color);
+                color: #fff;
+                font-size: 2rem;
+                margin-bottom: 2rem;
             }
             
             .projects__container {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
                 gap: 2rem;
             }
             
             .project-card {
-                background-color: var(--bg-color);
-                color: var(--text-color);
+                background-color: #ffffff;
+                color: #222;
                 width: 300px;
                 border-radius: 5px;
                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
                 padding: 1rem;
                 text-align: center;
+                transition: transform 0.3s ease;
+            }
+            
+            .project-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
             
             .project-card__image {
-                width: 250px;
-                height: 250px;
-                max-height: 200px;
+                width: 100%;
+                height: 200px;
                 object-fit: cover;
                 border-radius: 5px;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
             }
             
             .project-card__title {
                 font-size: 1.25rem;
                 margin-bottom: 1rem;
-                text-align: center;
             }
             
             .project-card__description {
                 font-size: 0.875rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
+                height: 0;
+                opacity: 0;
+                overflow: hidden;
+                transition: height 0.3s ease, opacity 0.3s ease;
+            }
+            
+            .project-card.active .project-card__description {
+                height: 100px;
+                /* Adjust the height as needed */
+                opacity: 1;
+                margin-bottom: 1rem;
             }
             
             .project-card__button {
-                background-color: var(--main-color);
+                background-color: #420177;
                 color: #fff;
-                margin-top: 10px;
                 padding: 0.75rem 1.5rem;
-                position: relative;
+                border: none;
                 border-radius: 5px;
+                font-size: 1rem;
                 cursor: pointer;
+                transition: background-color 0.3s ease;
             }
             
             .project-card__button:hover {
-                background: var(--hover);
+                background-color: #011aff;
             }
-            
-            @media (max-width: 1000px) {
-                .projects__container {
-                    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
-                }
-                .project-card {
-                    text-align: center;
-                }
-            }
-            
-            .popup {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(84, 105, 149, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s ease;
-                z-index: 9999;
-            }
-            
-            .popup__content {
-                background-color: var(--bg-color);
-                color: var(--text-color);
-                width: 100%;
-                padding: 2rem;
-                border-radius: 5px;
-                max-width: 500px;
-                text-align: center;
-            }
-            
-            .popup__image {
-                width: 400px;
-                object-fit: cover;
-                border-radius: 5px;
-                margin-bottom: 1.5rem;
-            }
-            
-            .popup__desc {
-                text-align: left;
-            }
-            
-            @media (max-width: 767px) {
-                .popup__content {
-                    padding: 1.5rem;
-                    max-width: 100%;
-                    overflow-x: auto;
-                    overflow-x: scroll;
-                    overflow-y: scroll;
-                }
-                .popup__image {
-                    width: 100%;
-                    max-width: 400px;
-                    height: auto;
-                }
-            }
-            
-            .openPopup {
-                background-color: blue;
-                color: white;
-                padding: 0.75rem 1.5rem;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            
-            .closePopup {
-                background-color: red;
-                /* Adjust the background color here */
-                color: white;
-                padding: 0.75rem 1.5rem;
-                border-radius: 5px;
-                cursor: pointer;
-            }
+            /* Custom CSS for responsive layout */
             
             .learn {
                 padding-top: 2rem;
@@ -739,6 +762,9 @@
                     display: none;
                 }
                 .home {
+                    background-color: var(--home-color);
+                }
+                .home {
                     grid-template-columns: 0.5fr 3fr;
                 }
                 .home-text {
@@ -789,3 +815,56 @@
                     margin-left: 25%;
                 }
             }
+            /* Your existing CSS */
+            /* ... */
+            /* Add animations to each section */
+            /* Your existing CSS */
+            /* ... */
+            /* Animations for each section */
+            
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes scaleIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.8);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+            /* Apply animations to each section */
+            
+            .home {
+                animation: fadeIn 1s ease;
+            }
+            
+            .about-container {
+                animation: slideInRight 1s ease;
+            }
+            
+            .skills {
+                animation: scaleIn 1s ease;
+            }
+            /* Add more animations for other sections as needed */
